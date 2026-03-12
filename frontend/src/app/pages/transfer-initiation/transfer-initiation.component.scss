@@ -1,0 +1,53 @@
+.page-container {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.validation-alert {
+  margin-bottom: 16px;
+}
+
+.validation-list {
+  margin: 0;
+  padding-left: 18px;
+}
+
+:host ::ng-deep .validation-alert.ant-alert-error {
+  background-color: #fff8f2;
+  border-color: #ffd7ba;
+}
+
+:host ::ng-deep .validation-alert.ant-alert-error .ant-alert-icon,
+:host ::ng-deep .validation-alert.ant-alert-error .ant-alert-message,
+:host ::ng-deep .validation-alert.ant-alert-error .ant-alert-description {
+  color: #ad6800;
+}
+
+:host ::ng-deep .ant-form-item-has-error .ant-input,
+:host ::ng-deep .ant-form-item-has-error .ant-input-affix-wrapper,
+:host ::ng-deep .ant-form-item-has-error .ant-select-selector,
+:host ::ng-deep .ant-form-item-has-error .ant-input-number {
+  border-color: #ffd7ba !important;
+  background-color: #fffaf6;
+  box-shadow: 0 0 0 2px rgba(255, 183, 77, 0.12);
+}
+
+:host ::ng-deep .ant-form-item-explain-error {
+  color: #ad6800;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

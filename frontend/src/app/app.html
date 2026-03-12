@@ -1,0 +1,17 @@
+<nz-layout class="app-layout">
+  <nz-header class="app-header">
+    <div class="brand">Gestion des Virements</div>
+    <ul nz-menu nzTheme="dark" nzMode="horizontal" class="menu">
+      <li nz-menu-item routerLink="/initiation" routerLinkActive="ant-menu-item-selected">
+        Initiation
+      </li>
+      <li nz-menu-item routerLink="/virements" routerLinkActive="ant-menu-item-selected">
+        Consultation
+      </li>
+    </ul>
+  </nz-header>
+
+  <nz-content class="app-content">
+    <router-outlet />
+  </nz-content>
+</nz-layout>

@@ -1,0 +1,101 @@
+<div class="page-container">
+  <nz-card nzTitle="Initiation d'un virement">
+    <form nz-form [formGroup]="transferForm" (ngSubmit)="submitTransfer()" nzLayout="vertical">
+      @if (validationMessages.length) {
+        <nz-alert
+          class="validation-alert"
+          nzType="error"
+          nzShowIcon
+          nzMessage="Veuillez corriger les erreurs suivantes :"
+          [nzDescription]="validationDescriptionTpl"
+        ></nz-alert>
+        <ng-template #validationDescriptionTpl>
+          <ul class="validation-list">
+            @for (message of validationMessages; track message) {
+              <li>{{ message }}</li>
+            }
+          </ul>
+        </ng-template>
+      }
+
+      <div class="grid">
+        <nz-form-item>
+          <nz-form-label nzRequired>Compte source</nz-form-label>
+          <nz-form-control
+            [nzValidateStatus]="transferForm.controls.sourceAccount"
+            nzErrorTip="Le compte source est obligatoire"
+          >
+            <input nz-input formControlName="sourceAccount" placeholder="Ex: MA6400112233445566778899" />
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzRequired>Compte destination</nz-form-label>
+          <nz-form-control
+            [nzValidateStatus]="transferForm.controls.destinationAccount"
+            nzErrorTip="Le compte destination est obligatoire"
+          >
+            <input
+              nz-input
+              formControlName="destinationAccount"
+              placeholder="Ex: MA5100554433221100998877"
+            />
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzRequired>Montant</nz-form-label>
+          <nz-form-control
+            [nzValidateStatus]="transferForm.controls.amount"
+            nzErrorTip="Le montant doit etre superieur a 0"
+          >
+            <nz-input-number
+              formControlName="amount"
+              [nzMin]="0.01"
+              [nzStep]="0.01"
+              [nzPrecision]="2"
+              class="full-width"
+            />
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzRequired>Devise</nz-form-label>
+          <nz-form-control
+            [nzValidateStatus]="transferForm.controls.currency"
+            nzErrorTip="Selectionnez une devise"
+          >
+            <nz-select formControlName="currency" nzPlaceHolder="Selectionnez une devise">
+              @for (currency of currencyOptions; track currency) {
+                <nz-option [nzValue]="currency" [nzLabel]="currency"></nz-option>
+              }
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <nz-form-item>
+        <nz-form-label>Beneficiaire</nz-form-label>
+        <nz-form-control>
+          <input nz-input formControlName="beneficiaryName" placeholder="Nom du beneficiaire" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label>Motif</nz-form-label>
+        <nz-form-control>
+          <textarea
+            nz-input
+            formControlName="reason"
+            rows="3"
+            placeholder="Motif du virement"
+          ></textarea>
+        </nz-form-control>
+      </nz-form-item>
+
+      <button nz-button nzType="primary" type="submit" [nzLoading]="isSubmitting">
+        Creer le virement
+      </button>
+    </form>
+  </nz-card>
+</div>

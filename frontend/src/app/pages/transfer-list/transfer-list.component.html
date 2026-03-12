@@ -1,0 +1,61 @@
+<div class="page-container">
+  <nz-card nzTitle="Liste des virements">
+    <nz-table #table [nzData]="virements" [nzLoading]="loading" [nzShowPagination]="true" [nzPageSize]="8">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Compte source</th>
+          <th>Compte destination</th>
+          <th>Montant</th>
+          <th>Beneficiaire</th>
+          <th>Statut</th>
+          <th>Date creation</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @for (virement of table.data; track virement.id) {
+          <tr>
+            <td>#{{ virement.id }}</td>
+            <td>{{ virement.sourceAccount }}</td>
+            <td>{{ virement.destinationAccount }}</td>
+            <td>{{ virement.amount | number: '1.2-2' }} {{ virement.currency }}</td>
+            <td>{{ virement.beneficiaryName || '-' }}</td>
+            <td>
+              <nz-tag [nzColor]="statusColor(virement.status)">
+                {{ statusLabel(virement.status) }}
+              </nz-tag>
+            </td>
+            <td>{{ virement.createdAt | date: 'dd/MM/yyyy HH:mm' }}</td>
+            <td>
+              <div class="action-cell">
+                <nz-select
+                  class="status-select"
+                  [(ngModel)]="editableStatuses[virement.id]"
+                  [ngModelOptions]="{ standalone: true }"
+                >
+                  @for (status of statusOptions; track status) {
+                    <nz-option [nzValue]="status" [nzLabel]="statusLabel(status)"></nz-option>
+                  }
+                </nz-select>
+                <button
+                  nz-button
+                  nzType="primary"
+                  (click)="updateStatus(virement)"
+                  [nzLoading]="updating.has(virement.id)"
+                >
+                  Mettre a jour
+                </button>
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </nz-table>
+
+    @if (!loading && !virements.length) {
+      <nz-empty nzNotFoundContent="Aucun virement disponible"></nz-empty>
+    }
+  </nz-card>
+</div>

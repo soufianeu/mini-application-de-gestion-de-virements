@@ -1,0 +1,93 @@
+.app-layout {
+  min-height: 100vh;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  height: 72px;
+  padding: 0 28px;
+  background: linear-gradient(120deg, #0d3b66 0%, #0f6cbd 50%, #1f8a8a 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 28px rgba(13, 59, 102, 0.26);
+}
+
+.brand {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+
+.menu {
+  flex: 1;
+  min-width: 0;
+  justify-content: flex-end;
+}
+
+.menu.ant-menu-dark {
+  background: transparent;
+  line-height: 72px;
+}
+
+.menu.ant-menu-horizontal {
+  border-bottom: 0;
+}
+
+.menu.ant-menu-horizontal > .ant-menu-item::after,
+.menu.ant-menu-horizontal > .ant-menu-submenu::after {
+  border-bottom: 0 !important;
+}
+
+.menu.ant-menu-dark .ant-menu-item {
+  border-radius: 10px;
+  margin-inline: 4px;
+  color: rgba(255, 255, 255, 0.9);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.menu.ant-menu-dark .ant-menu-item:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.menu.ant-menu-dark .ant-menu-item-selected {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.22) !important;
+}
+
+.app-content {
+  padding: 28px;
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+    padding: 14px;
+  }
+
+  .brand {
+    text-align: center;
+    font-size: 18px;
+  }
+
+  .menu {
+    justify-content: center;
+  }
+
+  .menu.ant-menu-dark {
+    line-height: 48px;
+  }
+
+  .app-content {
+    padding: 16px;
+  }
+}
